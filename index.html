@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار التوعية بالأمن السيبراني | هل أنت آمن؟</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body {
+            background: #0A1929;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #00D4AA;
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,212,170,0.25);
+        }
+        h1 { color: #00D4AA; font-size: 28px; margin-bottom: 10px; }
+        .sub { color: #FFC107; font-size: 18px; margin-bottom: 30px; }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 8px;
+            border-radius: 40px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-yes { background: #FF4757; color: #fff; }
+        .btn-no { background: #00D4AA; color: #0A1929; }
+        .btn:hover { transform: scale(1.05); }
+        .result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: right;
+            line-height: 1.8;
+        }
+        .result.safe { background: rgba(0,212,170,0.12); border-right: 4px solid #00D4AA; }
+        .result.danger { background: rgba(255,71,87,0.12); border-right: 4px solid #FF4757; }
+        .tips {
+            margin-top: 30px;
+            text-align: right;
+            background: rgba(255,255,255,0.04);
+            padding: 20px;
+            border-radius: 16px;
+            border-right: 4px solid #FFC107;
+        }
+        .tips h3 { color: #FFC107; margin-bottom: 12px; }
+        .tips ul { list-style: none; }
+        .tips li { padding: 6px 0; }
+        .tips li::before { content: "✅ "; }
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #8899AA;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+        .share {
+            margin-top: 20px;
+            background: #D4AF37;
+            color: #0A1929;
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        @media (max-width: 500px) {
+            h1 { font-size: 22px; }
+            .container { padding: 25px 18px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🛡️ اختبار التوعية بالأمن السيبراني</h1>
+    <p class="sub">هل أنت آمن ضد التصيد؟</p>
+
+    <p style="margin-bottom:20px;">تخيل أنك استلمت بريداً إلكترونياً من "البنك" يطلب منك تأكيد حسابك عبر رابط. ماذا تفعل؟</p>
+
+    <button class="btn btn-yes" onclick="showResult('danger')">أضغط على الرابط</button>
+    <button class="btn btn-no" onclick="showResult('safe')">لا أضغط، أتحقق أولاً</button>
+
+    <div id="result" class="result"></div>
+
+    <div class="tips">
+        <h3>🛡️ نصائح سريعة لكل موظف</h3>
+        <ul>
+            <li>لا تضغط على أي رابط مشبوه قبل التحقق.</li>
+            <li>استخدم كلمة مرور قوية + 2FA.</li>
+            <li>لا تشارك OTP مع أي شخص.</li>
+            <li>أبلغ قسم IT فوراً عند أي شك.</li>
+            <li>علّم عائلتك وزملائك هذه القواعد.</li>
+        </ul>
+    </div>
+
+    <button class="share" onclick="sharePage()">📤 شارك الصفحة مع زملائك</button>
+
+    <div class="footer">
+        <p>⚠️ هذه صفحة تعليمية. لا يتم جمع أي بيانات.</p>
+        <p>ثانية توقف = إنقاذ ملايين</p>
+    </div>
+</div>
+
+<script>
+    function showResult(type) {
+        const res = document.getElementById('result');
+        if (type === 'safe') {
+            res.className = 'result safe';
+            res.innerHTML = `<strong>✅ أحسنت!</strong><br>لقد تصرفت بوعي. الرابط المشبوه يجب التحقق منه أولاً.<br><br>
+            <strong>القاعدة الذهبية:</strong> توقف – فكر – تحقق.`;
+        } else {
+            res.className = 'result danger';
+            res.innerHTML = `<strong>🚨 لقد وقعت في الفخ!</strong><br>في العالم الحقيقي، كان يمكن أن تُسرق بياناتك البنكية.<br><br>
+            <strong>لا تقلق:</strong> هذا اختبار تعليمي. تعلمت الآن كيف تحمي نفسك.`;
+        }
+        res.style.display = 'block';
+    }
+
+    function sharePage() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'اختبار التوعية بالأمن السيبراني',
+                text: 'شارك في اختبار التوعية بالأمن السيبراني',
+                url: window.location.href
+            });
+        } else {
+            navigator.clipboard.writeText(window.location.href);
+            alert('تم نسخ رابط الصفحة. شاركه مع زملائك!');
+        }
+    }
+</script>
+</body>
+</html>
